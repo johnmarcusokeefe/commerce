@@ -1,0 +1,14 @@
+cd /Users/johnokeefe/desktop/cs50/project_2/commerce
+
+python3 manage.py runserver
+
+# create a superuser to access admin
+
+python manage.py createsuperuser 
+
+
+migrate:
+
+python3 manage.py makemigrations
+
+python3 manage.py migrate
