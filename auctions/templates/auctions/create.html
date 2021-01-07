@@ -10,7 +10,7 @@
 
     <!-- create listing form -->
     <div class="form-container">
-        <form action="{% url 'create_listing' %}" method="post">
+        <form action="{% url 'create' %}" method="post">
           {% csrf_token %}
           <h4>Input Listing Details</h4>
           {{ form.as_p }}

@@ -3,11 +3,11 @@
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse
 
-from .models import User, Listings, Categories, UserListings
-from .forms import ListingForm
+from .models import User, Listings, Categories
+from .forms import ListingForm, BidForm, CommentForm
 
 # index displays listings
 def index(request):
@@ -24,18 +24,60 @@ def index(request):
     })
 
 
+#  listing_id = models.ForeignKey(Listings, on_delete=models.CASCADE, null=True)
+#  user_id = models.CharField(max_length=99, default=None)
+#  bid = models.DecimalField(decimal_places=2, max_digits=10, default=0)
+#  date = models.DateTimeField(default=now,blank=True)
+
 # render a listing
-def display_listing(request, id):
+def display(request, id):
     # get the listing of the id
     listing = Listings.objects.get(id=id)
+    bidform = BidForm()
+    commentform = CommentForm()
+    bid = ""
+    if request.method == 'POST':
+        form = BidForm(request.POST)
+        if form.is_valid():
+            bid = form.cleaned_data['bid']
+            # get current bid 
+            # if it is add to bid model
+
+        
     print(listing)
-    return render(request, "auctions/display_listing.html", {
-               'listing': listing
+    return render(request, "auctions/display.html", {
+               'listing': listing,
+               'bidform': bidform,
+               'bid': bid,
+               'commentform': commentform
+            })
+
+# categories
+def categories(request, filter=None):
+    
+    if filter == None:
+        categories = Categories.objects.all()
+        return render(request, "auctions/categories.html", {
+               'categories': categories
+            })
+    else:
+        category_listings = Listings.objects.filter(category=filter.lower())
+        print("cat listings",category_listings)
+        return render(request, "auctions/index.html", {
+               'listings': category_listings,
+               'filter': filter
+            })
+
+
+# categories
+def watchlist(request):
+    return render(request, "auctions/categories.html", {
+               'title': 'watchlist'
             })
 
 
 # renders the form to create a new listing
-def create_listing(request):
+def create(request):
     message = False
     # post would be a call from the listing input form
     form = ListingForm
@@ -46,22 +88,21 @@ def create_listing(request):
             desc = form.cleaned_data['description']
             cat = form.cleaned_data['category']
             bid = form.cleaned_data['min_bid']
+            username=request.user.get_username()
+            user = User.objects.get(username=username)
             url = form.cleaned_data['media_url']
-            l = Listings(title=title, description=desc, category=cat, starting_bid=bid, url=url)
-            l.save()
-            user_id = request.user
-            listing_id = Listings.objects.last().id
-            ul = UserListings(user_id=user_id, listing_id=listing_id)
-            ul.save()
+            l = Listings(title=title, description=desc, category=cat, starting_bid=bid, listing_owner=user, url=url)
+            l.save()          
             return HttpResponseRedirect(reverse("index"))
     else:
         # render the input form
-        return render(request, "auctions/create_listing.html", {
+        return render(request, "auctions/create.html", {
                 "type": "createlisting",
                 "message": message,
                 "form": form
             })
 
+   
 
 def login_view(request):
     if request.method == "POST":

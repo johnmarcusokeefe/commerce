@@ -1,0 +1,18 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Add Listing</h2>
+
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+
+
+    <!-- display watchlist -->
+    <ul>
+        <li>{{title}}</li>
+    </ul>
+   
+
+
+{% endblock %}

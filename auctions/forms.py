@@ -17,3 +17,14 @@ class ListingForm(forms.Form):
     category = forms.CharField(widget = forms.Select(choices = TEST_CHOICES))
     min_bid = forms.DecimalField(label = "Minimum Bid")
     media_url = forms.CharField(label = "Media URL", max_length=30)
+
+
+class BidForm(forms.Form):
+    # input
+    bid = forms.DecimalField(label = "Bid")
+    
+
+class CommentForm(forms.Form):
+    comment_title = forms.CharField(label="Enter Title", max_length=30)
+    comment_name = forms.CharField(label="Name", max_length=30)
+    comment = forms.CharField(widget=forms.Textarea)

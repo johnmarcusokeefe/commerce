@@ -1,0 +1,43 @@
+{% extends "auctions/layout.html" %}
+
+
+{% block body %}
+
+            <div class="listing-detail">
+
+                <h2>Listing: {{ listing.title }}</h2>
+
+
+                    <a href="{{ watchlist }}">Watchlist</a>
+                    <div class="detail-image"><img src="static/auctions/{{ listing.url }}" alt="Listing Image"></div>
+                    Description: {{ listing.description }}</br>
+                    Price: {{ listing.starting_bid }}</br>
+                    Bids so far: {{ bids }}</br>
+
+                    <form action="{% url 'display' listing.id %}" method="post">
+                        {% csrf_token %}
+                        {{ bidform }}
+                        <input type="submit" value="Place Bid">
+                    </form>
+                    
+                    <h3>Details</h3>
+                    <ul>
+                        <li>Listed By: {{ listing.listing_owner }}</li>
+                        {% if listing.category %}
+                            <li>Category: {{ listing.category }}</li>
+                        {% else %}
+                            <li>No Category.</li>
+                        {% endif %}
+                    </ul>
+                    
+                    <form action="{% url 'display' listing.id %}" method="post">
+                        {% csrf_token %}
+                        <table>
+                        {{ commentform.as_table }}
+                        </table>
+                        <input type="submit" value="Post Comment">
+                    </form>
+
+            </div>
+  
+{% endblock %}

@@ -3,12 +3,17 @@
 
 {% block body %}
     <h2>Active Listings</h2>
+         {% if filter %}
+            <h3>Category Filter: {{ filter }}</h3>
+         {% else %}
+            <li>Category Filter: All</li>
+         {% endif %}
     <ul>
         {% for listing in listings %} 
             <div class="row">
                 <div class="left-col">
                     {% load static %}
-                    <a href="{% url 'display_listing' listing.id %}"><img src="static/auctions/{{ listing.url }}" alt="Listing Image"></a>
+                    <a href="{% url 'display' listing.id %}"><img src="static/auctions/{{ listing.url }}" alt="Listing Image"></a>
                 </div>
                 <div class="right-col">
                     Title: {{ listing.title }}</br>

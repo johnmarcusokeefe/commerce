@@ -19,24 +19,15 @@ class Listings(models.Model):
     starting_bid = models.DecimalField(decimal_places=2, max_digits=10, default=0)
     url = models.URLField(max_length=200)
     date = models.DateTimeField(default=now,blank=True)
+    listing_owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return f"{self.title} {self.description} {self.category} {self.starting_bid} {self.url} {self.date}"
-
-
-# added listing id
-class UserListings(models.Model):
-    
-    user_id = models.CharField(max_length=50, default=None)
-    listing_id = models.CharField(max_length=50, default=None)
-
-    def __str__(self):
-        return f"{self.user_id} {self.listing_id}"
+        return f"{self.title} {self.description} {self.category} {self.starting_bid} {self.url} {self.date} {self.listing_owner} "
 
 
 class ActiveListings(models.Model):
 
-    listing_id = models.ForeignKey(Listings, on_delete=models.CASCADE, null=True)
+    listing_id = models.CharField(max_length=99, default=None)
 
 
 class Bids(models.Model):

@@ -1,6 +1,9 @@
 body {
     padding: 10px;
 }
+.clear-both {
+    clear: both;
+}
 .form-button {
     float: right;
 }
@@ -11,9 +14,7 @@ body {
     padding: 20px;
     
 }
-.clear-both {
-    clear: both;
-}
+
 .row {
     border-top: 1px dotted grey;
     margin-bottom: 10px;
@@ -24,6 +25,9 @@ body {
     padding-top: 20px;
     width: 25%;
     float: left:
+}
+.listing-detail {
+    padding-left: 20px;
 }
 .right-col {
     width: 70%;
