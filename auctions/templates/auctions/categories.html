@@ -1,7 +1,7 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-    <h2>Categories</h2>
+    <h2 class="page-title">Categories</h2>
 
     {% if message %}
         <div>{{ message }}</div>
@@ -9,14 +9,12 @@
 
 
     <!-- display categories -->
-    <ul>
+    <ul  class="categories">
     {% for category in categories %} 
-            <li><a href="{% url 'categories' category %}">{{ category }}</li></a>
+            <li><a href="{% url 'index' category %}">{{ category }}</a></li>
     {% empty %}
             <li>No categories.</li>
     {% endfor %}
     </ul>
-   
-
 
 {% endblock %}

@@ -2,27 +2,48 @@
 
 
 {% block body %}
-    <h2>Active Listings</h2>
-         {% if filter %}
-            <h3>Category Filter: {{ filter }}</h3>
-         {% else %}
-            <li>Category Filter: All</li>
-         {% endif %}
-    <ul>
-        {% for listing in listings %} 
-            <div class="row">
-                <div class="left-col">
+    <h2 class="page-title">Active Listings</h2>
+    <div class="row">
+        <div class="col-3"> 
+        {% if filter == "none" %}
+            <h4>Category: All</h4>
+        {% else %}
+            <h4>Category: {{ filter }}</h4> 
+        {% endif %}
+        <ul class="category-filter">
+        {% if current_page == "All" %}
+            <li id="nav-hightlighted"><a href="{% url 'index' 'All' %}">All</a></li>
+          {% else %}    
+            <li class="nav-std"><a href="{% url 'index' 'All' %}">All</a></li>
+        {% endif %}
+        {% for category in categories %} 
+            {% if current_page == category|striptags %}
+              <li id="nav-hightlighted"><a href="{% url 'index' category %}">{{ category }}</a></li>
+            {% else %}    
+              <li class="nav-std"><a href="{% url 'index' category %}">{{ category }}</a></li>
+            {% endif %}
+        {% endfor %}       
+        </ul>
+        </div> 
+        <div class="listings col-8"> 
+            {% for listing in listings %}    
+            <div class="row row-line">
+                <div class="col-4">
                     {% load static %}
-                    <a href="{% url 'display' listing.id %}"><img src="static/auctions/{{ listing.url }}" alt="Listing Image"></a>
+                    <a href="{% url 'details' listing.id %}">
+                        <img src="static/auctions/images/{{ listing.url }}" alt="{{ listing.title }}">
+                    </a>
                 </div>
-                <div class="right-col">
-                    Title: {{ listing.title }}</br>
-                    Price: {{ listing.starting_bid }}</br>
-                    Created: {{ listing.date }}</br>
+                <div class=" col-7">
+                    <a href="{% url 'details' listing.id %}"><h3>{{ listing.title }}</h3></a>
+                    <p>Listing ID: {{ listing.id }}</p>
+                    <p>Starting Bid: ${{ listing.starting_bid }}</p>
+                    <p>Created: {{ listing.date }}</p>          
                 </div>
             </div>
-        {% empty %}
-            <li>No Listings.</li>
-        {% endfor %}
-    </ul>
+            {% empty %}
+            <div>No Listings.</div>
+            {% endfor %}
+        </div>
+    </div>  
 {% endblock %}

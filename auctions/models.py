@@ -12,7 +12,7 @@ class User(AbstractUser):
 
 class Listings(models.Model):
 
-    #default: id = models.AutoField(primary_key=True)
+    #id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=50, default=None)
     description = models.CharField(max_length=100, default=None)
     category = models.CharField(max_length=50, default=None)
@@ -22,20 +22,22 @@ class Listings(models.Model):
     listing_owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return f"{self.title} {self.description} {self.category} {self.starting_bid} {self.url} {self.date} {self.listing_owner} "
+        return f"{self.id} {self.title} {self.description} {self.category} {self.starting_bid} {self.url} {self.date} {self.listing_owner} "
 
 
 class ActiveListings(models.Model):
 
-    listing_id = models.CharField(max_length=99, default=None)
+    listing_id = models.ForeignKey(Listings, on_delete=models.CASCADE, null=True)
 
 
 class Bids(models.Model):
 
     listing_id = models.ForeignKey(Listings, on_delete=models.CASCADE, null=True)
     user_id = models.CharField(max_length=99, default=None)
-    bid = models.DecimalField(decimal_places=2, max_digits=10, default=0)
+    current_bid = models.DecimalField(decimal_places=2, max_digits=10, default=0)
     date = models.DateTimeField(default=now,blank=True)
+    def __str__(self):
+        return f"{self.listing_id} {self.user_id} {self.current_bid} "
    
 
 class Comments(models.Model):
@@ -43,15 +45,18 @@ class Comments(models.Model):
     listing_id = models.ForeignKey(Listings, on_delete=models.CASCADE, null=True)
     user_id = models.CharField(max_length=99, default=None)
     comment = models.CharField(max_length=100, default=None)
-    date = models.DateTimeField(default=now,blank=True)
+    date = models.DateTimeField(default=now, blank=True)
 
 
 class Watchlist(models.Model):
 
-    listing_id = models.ForeignKey(Listings, on_delete=models.CASCADE, null=True)
     user_id = models.CharField(max_length=99, default=None)
-    date = models.DateTimeField(default=now,blank=True)
+    listing = models.ForeignKey(Listings, on_delete=models.CASCADE, null=True)
 
+
+    def __str__(self):
+        return f"{self.id} {self.listing}" 
+    
 
 class Categories(models.Model):
 

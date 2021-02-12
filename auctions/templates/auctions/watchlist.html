@@ -1,18 +1,37 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-    <h2>Add Listing</h2>
+    <h2 class="page-title">Watchlist</h2>
 
     {% if message %}
         <div>{{ message }}</div>
     {% endif %}
 
-
+    {% if login == "none" %}
+        <p>You need login or register to view and add to watchlist.</p>
+    {% else %}
     <!-- display watchlist -->
-    <ul>
-        <li>{{title}}</li>
-    </ul>
-   
+    <div class="watchlist-listings col-9"> 
+        {% for watchlist in watchlist %}    
+        <div class="row row-line">
+            <div class="col-4">
+                {% load static %}
+                <a href="{% url 'details' watchlist.listing.id %}">
+                    <img src="/static/auctions/images/{{ watchlist.listing.url }}" alt="{{ listing.title }}">
+                </a>
+            </div>
+            <div class=" col-5">
+                <a href="{% url 'details' watchlist.listing.id %}"><h3>{{ watchlist.listing.title }}</h3></a>
+                <p>Listing ID: {{ watchlist.listing.id }}</p>
+                <p>Created: {{ watchlist.listing.date }}</p>   
+                <p>Owner: {{ watchlist.listing.listing_owner }}</p>       
+            </div>
+        </div>
+        {% empty %}
+        <div>No Listings.</div>
+        {% endfor %}
+    </div>
+    {% endif %}
 
 
 {% endblock %}

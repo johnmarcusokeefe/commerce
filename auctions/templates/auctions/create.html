@@ -1,7 +1,6 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-    <h2>Add Listing</h2>
 
     {% if message %}
         <div>{{ message }}</div>
@@ -9,14 +8,21 @@
 
 
     <!-- create listing form -->
-    <div class="form-container">
+    <div class="create-listing-form">
+
+        <h4>Create new listing</h4>
         <form action="{% url 'create' %}" method="post">
-          {% csrf_token %}
-          <h4>Input Listing Details</h4>
-          {{ form.as_p }}
-          <input class="btn btn-primary form-button" type="submit" value="Save">
-          <div class="clear-both"></div>
-        </form>
+        <table class="create-listing-table">
+        
+            {% csrf_token %}
+            {{ form.as_table }}  
+            <tr>
+                <td></td>
+                <td><input class="btn btn-primary form-button" type="submit" value="Save"></td>
+            </tr>  
+        
+        </table>    
+       </form> 
     </div>
 
 

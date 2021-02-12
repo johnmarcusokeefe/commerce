@@ -1,33 +1,173 @@
 body {
+}
+img {
+    position: relative;
+    display: block;
+    height: 150px;
+}
+table {
+    width: 100%;
+}
+tr {
+    width: 100%;
+}
+.bid {
+    margin-top: 20px;
+}
+.bid-input input {
+    width: 100px;
+}
+.btn-primary {
+    margin-top: 30px;
+    width: 75px;
+}
+.capit {
+    text-transform: capitalize;
+}
+.categories {
+    list-style: none;
+    border-top: 1px dotted gray;
+}
+.categories li {
+    border-bottom: 1px dotted gray;
+    width: 90%;
     padding: 10px;
 }
-.clear-both {
+.category-filter {
+    padding: 0;
+    margin-left: 20px;
+    margin-top: 30px;
+}
+.category-filter li {
+    border-bottom: 1px dotted gray;
+    width: 70%;
+    list-style-type: none;
+    margin-top: 10px;
+}
+.clearfix {
     clear: both;
+}
+.comment {
+    width: 100%;
+    border-top: 1px dotted gray;
+    padding-top: 30px;
+    margin-top: 10px;
+    margin-bottom: 50px;
+}
+.comment-form {
+    display: block;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.comment form textarea  {
+    width: 100%;
+}
+.comment-list {
+    display: block;
+    width: 90%;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.comment-list div {
+    border-top: 1px dotted gray;
+    padding: 10px;
+    margin-top: 5px;
+}
+.comment-text {
+    width: 70%;
+    padding-left: 10px;
+    border: 1px dotted gray;
+}
+#comment-title {
+    width: 20%;
+}
+.create-listing-form {
+    width: 70%;
+    margin: auto;
+    margin-top: 5%;
+    border: 1px dotted gray;
+}
+.create-listing-form form {
+    padding: 10px;
+}
+.create-listing-form h4 {
+    background: lightgray;
+}
+.create-listing-table tr {
+    vertical-align: top;
+}
+.details {
+    padding-left: 50px;
+    margin-top: 50px;
+}
+.details-text {
+    margin-top: 50px;
+}
+.detail-image {
+    padding-top: 5%;
+    padding-bottom: 5%;
+    border-right: 1px dotted gray;
+    
+}
+.detail-image img {
+    width: 60%;
+    height: auto;
+    margin: auto;
 }
 .form-button {
     float: right;
 }
-.form-container {
-    width: 75%;
-    margin: auto;
-    border: 1px dotted gray;
-    padding: 20px;
-    
+.header {
+    border-bottom: 1px solid gray;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
-
-.row {
-    border-top: 1px dotted grey;
-    margin-bottom: 10px;
-    min-height: 100px;
+#id_category {
+    width: 30%;
+}
+#id_description {
+    width: 100%;
+}
+#id_media_url {
+    width: 30%;
+}
+#id_min_bid {
+    width: 30%;
+}
+#id_title {
+    width: 100%;
 }
 .left-col {
     display: block;
     padding-top: 20px;
     width: 25%;
-    float: left:
+    float: left;
+}
+.listings {
+    margin-top: 50px;
+    margin-left: 10px;
+}
+.listings p {
+    line-height: 1.2;
+}
+.listings h3 {
+    margin-bottom: 30px;
 }
 .listing-detail {
     padding-left: 20px;
+}
+.login {
+    float: right;
+    margin-right: 10px;;
+}
+#nav-hightlighted a {
+    font-weight: 900;
+}
+.page-title {
+    padding-left: 15px;
+    margin-top: 20px;
 }
 .right-col {
     width: 70%;
@@ -35,10 +175,31 @@ body {
     padding-top: 20px;
     padding-left: 20px;
 }
-img {
-    position: relative;
-    display: block;
-    height: 150px;
+.row {
+    margin: 0;
+    padding: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.row-line {
+    border-bottom: 1px dotted grey;
+}
+.title {
+    margin-left: 20px;
+}
+.user-form {
+    margin-top: 5%;
+    width: 40%;
     margin-left: auto;
     margin-right: auto;
+    padding: 30px;
+    border: 1px dotted gray;
+}
+.user-form-button {
+    float: right;
+    padding: 5px;
+}
+.watchlist-listings {
+    margin-top: 50px;
+    margin-left: 15%;
 }
