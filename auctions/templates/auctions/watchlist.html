@@ -16,12 +16,12 @@
         <div class="row row-line">
             <div class="col-4">
                 {% load static %}
-                <a href="{% url 'details' watchlist.listing.id %}">
+                <a href="{% url 'listing' watchlist.listing.id %}">
                     <img src="/static/auctions/images/{{ watchlist.listing.url }}" alt="{{ listing.title }}">
                 </a>
             </div>
             <div class=" col-5">
-                <a href="{% url 'details' watchlist.listing.id %}"><h3>{{ watchlist.listing.title }}</h3></a>
+                <a href="{% url 'listing' watchlist.listing.id %}"><h3 class=" capit">{{ watchlist.listing.title }}</h3></a>
                 <p>Listing ID: {{ watchlist.listing.id }}</p>
                 <p>Created: {{ watchlist.listing.date }}</p>   
                 <p>Owner: {{ watchlist.listing.listing_owner }}</p>       

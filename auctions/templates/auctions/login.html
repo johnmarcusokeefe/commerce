@@ -4,9 +4,7 @@
 
     
 
-    {% if message %}
-        <div>{{ message }}</div>
-    {% endif %}
+   
     
     <form class="user-form" action="{% url 'login' %}" method="post">
         <h2>Login</h2>
@@ -20,7 +18,12 @@
         <input class="btn btn-primary user-form-button" type="submit" value="Login">
         <div class="clearfix"></div>
         Don't have an account? <a href="{% url 'register' %}">Register here.</a>
+        
     </form>
+        {% if message %}
+            <div class="login-error">{{ message }}</div>
+        {% endif %}
+   
     
     
 

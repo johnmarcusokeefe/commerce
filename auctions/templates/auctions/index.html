@@ -30,12 +30,12 @@
             <div class="row row-line">
                 <div class="col-4">
                     {% load static %}
-                    <a href="{% url 'details' listing.id %}">
-                        <img src="static/auctions/images/{{ listing.url }}" alt="{{ listing.title }}">
+                    <a href="{% url 'listing' listing.id %}">
+                        <img class="listing-image" src="static/auctions/images/{{ listing.url }}" alt="{{ listing.title }}">
                     </a>
                 </div>
                 <div class=" col-7">
-                    <a href="{% url 'details' listing.id %}"><h3>{{ listing.title }}</h3></a>
+                    <a href="{% url 'listing' listing.id %}"><h3 class="capit">{{ listing.title }}</h3></a>
                     <p>Listing ID: {{ listing.id }}</p>
                     <p>Starting Bid: ${{ listing.starting_bid }}</p>
                     <p>Created: {{ listing.date }}</p>          

@@ -17,6 +17,11 @@ tr {
 .bid-input input {
     width: 100px;
 }
+.bid-message {
+    display: block;
+    margin-top: 10px;
+    height: 10px;
+}
 .btn-primary {
     margin-top: 30px;
     width: 75px;
@@ -60,6 +65,7 @@ tr {
     margin-left: auto;
     margin-right: auto;
 }
+
 .comment form textarea  {
     width: 100%;
 }
@@ -102,19 +108,17 @@ tr {
     padding-left: 50px;
     margin-top: 50px;
 }
-.details-text {
-    margin-top: 50px;
+.row .details-text {
+    margin-top: 20px;
 }
 .detail-image {
     padding-top: 5%;
     padding-bottom: 5%;
     border-right: 1px dotted gray;
-    
 }
 .detail-image img {
-    width: 60%;
+    width: 80%;
     height: auto;
-    margin: auto;
 }
 .form-button {
     float: right;
@@ -145,6 +149,12 @@ tr {
     width: 25%;
     float: left;
 }
+.login-error {
+    margin-top: 20px;
+    height: 10px;
+    display: block;
+    text-align: center;
+}
 .listings {
     margin-top: 50px;
     margin-left: 10px;
@@ -157,6 +167,13 @@ tr {
 }
 .listing-detail {
     padding-left: 20px;
+}
+.listing-description {
+    margin-top: 20px;
+}
+img.listing-image {
+    width: 100%;
+    height: auto;
 }
 .login {
     float: right;
@@ -199,6 +216,14 @@ tr {
     float: right;
     padding: 5px;
 }
+#watch-count {
+    background: red;
+    color: white;
+    font-size: x-small;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
 .watchlist-listings {
     margin-top: 50px;
     margin-left: 15%;

@@ -10,8 +10,9 @@
 
     <!-- display categories -->
     <ul  class="categories">
-    {% for category in categories %} 
-            <li><a href="{% url 'index' category %}">{{ category }}</a></li>
+    {% for key, value in cat_count.items %} 
+            <li><a href="{% url 'index' key %}"><span class="capit">{{ key }}</span>: {{ value }}</a></li>
+
     {% empty %}
             <li>No categories.</li>
     {% endfor %}
