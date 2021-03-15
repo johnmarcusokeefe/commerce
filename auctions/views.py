@@ -6,6 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 
 from .models import Listings, Categories, Comments, Watchlist, Bids, User
@@ -59,11 +60,11 @@ def categories(request):
             })
 
 # renders the form to create a new listing
+@login_required(login_url='/login/')
 def create(request):
-    message = False
+
     # post would be a call from the listing input form
     form = CreateListingForm()
-
 
     if request.method == 'POST':
         form = CreateListingForm(request.POST)
@@ -83,8 +84,7 @@ def create(request):
         # render the input form
         return render(request, "auctions/create.html", {
                 "type": "createlisting",
-                "message": message,
-                "form": form,
+                "form": form
             })
 
 
@@ -97,13 +97,14 @@ def endbid(request, id):
         bids_so_far = 0
     else:
         bids_so_far = all_bids.count()
+
     highest = listing.starting_bid
 
     highest_owner = ""
     for b in all_bids:
         if b.current_bid + 1 > highest:
             highest = b.current_bid
-            #highest_owner = b.user_id
+            
             
     # tests if bids are greater than 0 before closing otherwise todo prompt if wants closed no bids
     if bids_so_far > 0:
@@ -113,7 +114,7 @@ def endbid(request, id):
         messages.add_message(request, messages.INFO, 'Bidding is closed')
     else:
         # alert message to close
-        Bids.objects.filter(listing_id=id).filter(current_bid=highest).update(winning_bid=True)
+        Bids.objects.filter(listing_id=id).filter(current_bid=highest).update(winning_bid=False)
         Listings.objects.filter(id=id).update(active_flag=False)
         messages.add_message(request, messages.ERROR, 'You have closed the listing with 0 bids')
     
@@ -124,6 +125,7 @@ def endbid(request, id):
 def listing(request, id):
     # get the listing of the id
     listing = Listings.objects.get(id=id)
+    active_flag = listing.active_flag
     user_id = request.user
     listing_id = Listings(id=id)
 
@@ -178,7 +180,6 @@ def listing(request, id):
     commentform = CommentForm(request.POST)
     # process comments    
     if request.method == 'POST' and commentform.is_valid():    
- 
         comment = commentform.cleaned_data['comment']
         c = Comments(listing_id=listing_id, user_id=user_id, comment=comment)
         c.save()
@@ -212,17 +213,19 @@ def listing(request, id):
                 'watch_count': watch_count,
                 'winner': winner,
                 'bid_status': bid_status,
+                'active_flag': active_flag,
                 'userauthenticated': True
             })
     else:
         return render(request, "auctions/listing.html", {
-               'listing': listing,
-               'current_bid': highest,
-               'bids_so_far': bids_so_far,
-               'comments': comments,
-               'bid_status': bid_status,
-               'userauthenticated': False
+            'listing': listing,
+            'current_bid': highest,
+            'bids_so_far': bids_so_far,
+            'comments': comments,
+            'bid_status': bid_status,
+            'userauthenticated': False
             })
+
 
 
 
@@ -280,9 +283,9 @@ def login_view(request):
             return HttpResponseRedirect(reverse("index"))
 
         else:
-            return render(request, "auctions/login.html", {
-                "message": "Invalid username and/or password!"
-            })
+            messages.add_message(request, messages.ERROR, 'Invalid username and/or password!')
+            return render(request, "auctions/login.html")
+
     else:
         return render(request, "auctions/login.html")
 

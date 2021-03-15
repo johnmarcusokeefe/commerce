@@ -17,13 +17,14 @@
                 <div class="row bid">
                     <div class="clearfix">
                         <h3>Bid</h3>
-
                         {% if userauthenticated == True %} 
                             {% if bid_status == False %}
                               <p>Current Bid: ${{ current_bid }}</p>
                               <p>{{ bids_so_far }} Bid(s) so far.</p> 
                               {% if bids_so_far > 0 %}
-                                <p><strong><span class="capit">{{ highest_owner }}</span></strong> has the current highest bid.</p>
+                                <p><strong>
+                                    <span class="capit">{{ highest_owner }}</span>
+                                </strong> has the current highest bid.</p>
                               {% endif %}
                             {% else %}
                               {% if highest_owner == user_id %}
@@ -32,12 +33,11 @@
                                 <p>Bid closed at: ${{ current_bid }}</p>
                               {% endif %}
                             {% endif %}
-                         
                             {% if bid_status == False %}
                                 {% if listing.listing_owner == user_id %}
                                     <form action="{% url 'endbid' listing.id %}" method="post">
                                     {% csrf_token %}
-                                    {% if bid_status == True %}
+                                    {% if active_flag == True %}
                                         <input type="submit" value="Close Listing">
                                     {% else %}
                                         <p>Biding closed</p>
@@ -56,21 +56,14 @@
                             <div class="bid-message">    
                             {% if messages %}     
                             {% for message in messages %}
-                              <span class="message" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</span>
+                            <span {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</span>
                             {% endfor %}
                             {% endif %}   
                             </div>
                         {% else %}
-                          {% if bid_status == False %}
-                            <p>{{ bids_so_far }} Bid(s) so far.</p> 
                             <p>Current Bid: ${{ current_bid }}</p>
                             <p>You need to login to bid.</p>
-                          {% else %}
-                            <p>Bid closed at: ${{ current_bid }}</p>
-                          {% endif %}
-
                         {% endif %}
-            
                     </div>
                 </div>
                 <div class="row listing-text">
@@ -92,7 +85,6 @@
                         </p>
                     {% endif %}
                     </div>
-                   
                 </div>
              </div>
             </div>

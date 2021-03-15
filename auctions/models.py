@@ -23,7 +23,7 @@ class Listings(models.Model):
     active_flag = models.BooleanField(default=True)
 
     def __str__(self):
-        return f"{self.id} {self.title} {self.description} {self.category} {self.starting_bid} {self.url} {self.date} {self.listing_owner}"
+        return f"{self.id} {self.title} {self.description} {self.category} {self.starting_bid} {self.url} {self.date} {self.listing_owner} {self.active_flag}"
 
 # by default the listing is added to bids with the starting bid0.23
 class Bids(models.Model):

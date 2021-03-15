@@ -169,8 +169,7 @@ tr {
     padding-left: 20px;
 }
 .listing-description {
-    margin-top: 20px;
-}
+ }
 img.listing-image {
     width: 100%;
     height: auto;
@@ -178,6 +177,12 @@ img.listing-image {
 .login {
     float: right;
     margin-right: 10px;;
+}
+.message {
+    display: block;
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
 }
 #nav-hightlighted a {
     font-weight: 900;
