@@ -16,10 +16,10 @@
              <div class="col-5 listing">
                 <div class="row bid">
                     <div class="clearfix">
-                        <h3>Bid</h3>
+                        <h2><u>Bid</u></h2>
                         {% if userauthenticated == True %} 
                             {% if bid_status == False %}
-                              <p>Current Bid: ${{ current_bid }}</p>
+                              <h3>${{ current_bid }}</h3>
                               <p>{{ bids_so_far }} Bid(s) so far.</p> 
                               {% if bids_so_far > 0 %}
                                 <p><strong>
@@ -61,17 +61,17 @@
                             {% endif %}   
                             </div>
                         {% else %}
-                            <p>Current Bid: ${{ current_bid }}</p>
+                            <h3>${{ current_bid }}</h3>
                             <p>You need to login to bid.</p>
                         {% endif %}
                     </div>
                 </div>
                 <div class="row listing-text">
                     <div class="clearfix">
-                    <h3>Details</h3>
-                    <p>Listed By: {{ listing.listing_owner }}
+                    <h2><u>Details</u></h2>
+                    <p>Listed By: {{ listing.listing_owner }}</p>
                     {% if listing.category %}
-                        <p>Category: {{ listing.category }}
+                        <p>Category: {{ listing.category }}</p>
                     {% else %}
                         <p>No Categories available.</p>
                     {% endif %}

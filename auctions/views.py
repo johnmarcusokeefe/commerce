@@ -100,7 +100,6 @@ def endbid(request, id):
 
     highest = listing.starting_bid
 
-    highest_owner = ""
     for b in all_bids:
         if b.current_bid + 1 > highest:
             highest = b.current_bid
