@@ -48,7 +48,6 @@ class BidForm(forms.Form):
     bid = forms.DecimalField(label="",min_value=0, decimal_places=0, initial=0)
     
 
-
 # comment form
 class CommentForm(forms.Form):
     
